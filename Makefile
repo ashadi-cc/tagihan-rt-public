@@ -1,4 +1,4 @@
-.PHONY: help build up down restart logs bash bash-root composer npm artisan migrate fresh seed test clean
+.PHONY: help build up down restart logs bash bash-root composer npm artisan migrate fresh seed test test-db clean
 
 help: ## Show this help message
 	@echo 'Usage: make [target]'
@@ -51,7 +51,10 @@ fresh: ## Fresh migration with seed
 seed: ## Run database seeders
 	docker-compose exec -u www-data app php artisan db:seed
 
-test: ## Run tests
+test-db: ## Create the database used by the test suite (rt4_testing)
+	docker-compose exec db sh -c 'mariadb -uroot -p"$$MYSQL_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS rt4_testing"'
+
+test: test-db ## Run tests
 	docker-compose exec -u www-data app php artisan test
 
 queue-listen: ## Run queue listener

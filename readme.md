@@ -9,3 +9,5 @@ Administrators manage residents (warga), generate monthly and one-off bills (tag
 A WhatsApp bot connects through the API in `routes/api.php`. Residents use it to register their number, reset their password and ask questions about their bills. Administrators use it to push announcements.
 
 Built with Laravel 10, PHP 8.3 and MariaDB.
+
+More detail is in [`docs/`](docs): the [bot API reference](docs/AI_FUNCTION_CALL_API.md) and notes on the [QRIS payment flow](docs/QRIS_PAYMENT_FLOW.md).

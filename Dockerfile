@@ -111,16 +111,6 @@ RUN usermod -u 1000 www-data && \
     mkdir -p /var/www && \
     chown -R www-data:www-data /var/www
 
-# Install Laravel Envoy globally for www-data user
-USER www-data
-RUN composer global require "laravel/envoy" --no-interaction
-
-# Switch back to root for configuration
-USER root
-
-# Add Composer global bin to PATH for www-data
-ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
-
 # Configure PHP-FPM to run as www-data
 RUN mkdir -p /run/php /var/log && \
     touch /var/log/php8.3-fpm.log && \
